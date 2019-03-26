@@ -1,0 +1,22 @@
+学习参考自
+《Spring Cloud 入门教程(六)： 用声明式REST客户端Feign调用远端HTTP服务》
+连接： http://www.cnblogs.com/chry/p/7266916.html
+
+遇见httpClient置换后的问题解决参考学习
+《Feign2.0用Apache的Httpclient发送请求并配置连接池》
+连接：https://my.oschina.net/bianxin/blog/1821684
+如下代码参考
+    <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-httpclient -->
+    <!-- <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-httpclient</artifactId>
+    </dependency> -->
+
+切要求这个包版本与feign-core的版本保持一致，并在application.yml中添加配置如下：
+feign:
+  httpclient:
+    enabled: true
+
+新的CloudFinchley.RC2版中这不需要这个了，
+引入此包后，Spring Cloud会将LoadBalancerFeignClient中的Client注入为ApacheHttpClient。
+默认的连接池信息在FeignHttpClientProperties。

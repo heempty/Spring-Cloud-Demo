@@ -1,0 +1,19 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8701/eureka/
+spring:
+  application:
+    name: service-feign
+server:
+  port: 8704
+feign:
+  #启用httpclient 置换其他httpclient时配置
+  #新的CloudFinchley.RC2版中这不需要这个了，
+  #引入此包后，Spring Cloud会将LoadBalancerFeignClient中的Client注入为ApacheHttpClient。
+  #默认的连接池信息在FeignHttpClientProperties。
+  httpclient:
+    enabled: true
+    #启动内置熔断器
+  hystrix:
+    enabled: true

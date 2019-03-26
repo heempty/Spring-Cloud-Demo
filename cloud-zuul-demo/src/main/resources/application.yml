@@ -1,0 +1,20 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8701/eureka/
+server:
+  port: 8705
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+      #配置的路由名称feign
+      feign:
+          #通过serviceId来发现服务具体地址， path是路由的地址映射关系
+          #访问http://localhost:8705/api-feign可直接路由到 feign -> http://localhost:8704/.
+          path: /api-feign/**
+          serviceId: service-feign
+      serverClient:
+          path: /api-client/**
+          serviceId: service-client
